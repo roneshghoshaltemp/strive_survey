@@ -18,6 +18,3 @@ For the purposes of an MVP I thought a user would only complete 1 survey - hence
 a user "belongs_to" a survey.
 
 Ran out of time!
-
-
-
