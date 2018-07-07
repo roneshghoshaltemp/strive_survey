@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20180707010640) do
 
   create_table "users", force: :cascade do |t|
     t.string "email"
+    t.boolean "completed_survey", default: false
     t.bigint "survey_id"
     t.index ["survey_id"], name: "index_users_on_survey_id"
   end

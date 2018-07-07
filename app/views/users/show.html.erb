@@ -1,0 +1,19 @@
+<% if !@user.completed_survey %>
+
+  <div>
+    Welcome, <%= @user.email %>! Click "Start" to start the survey.
+    <%= link_to "Start", question_path(Question.first, user_id: @user.id) %>
+  </div>
+
+<% else %>
+
+  <div>
+    Congratulations! Here are your answers.
+    
+    <% @user.survey.questions.each do |question| %>
+      <div><%= question.body %></div>
+      <div><%= @user.answers.find(question.id).body %></div>
+    <% end %>
+  </div>
+
+<% end %>
