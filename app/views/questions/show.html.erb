@@ -1,0 +1,44 @@
+<div>
+  <div>
+    Question <%= @question.id %> of 5
+  </div>
+  <%= @question.body %>
+  <%= render partial: 'answers/form' %>
+  
+  <div id="timer">
+    Time Remaining
+    <div id="clockdiv">    
+      Minutes: <span class="minutes"></span><br>
+      Seconds: <span class="seconds"></span>
+    </div>
+  </div>
+</div>
+
+
+
+<script type="text/javascript">
+var deadline = new Date(Date.now() + 180000);
+
+function getTimeRemaining(endtime){
+  var t = Date.parse(endtime) - Date.parse(new Date());
+  var seconds = Math.floor( (t/1000) % 60 );
+  var minutes = Math.floor( (t/1000/60) % 60 );
+  return {
+    'total': t,
+    'minutes': minutes,
+    'seconds': seconds
+  };
+}
+function initializeClock(id, endtime){
+  var clock = document.getElementById(id);
+  var timeinterval = setInterval(function(){
+    var t = getTimeRemaining(endtime);
+    clock.innerHTML = 'minutes: ' + t.minutes + '<br>' +
+                      'seconds: ' + t.seconds;
+    if(t.total<=0){
+      clearInterval(timeinterval);
+    }
+  }, 1000);
+}
+initializeClock('clockdiv', deadline);
+</script>

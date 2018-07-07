@@ -1,0 +1,33 @@
+<% if !@user.completed_survey %>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3>Welcome, <%= @user.email %>! Click "Start" to start the survey.</h3>
+    </div>
+    <%= link_to "Start", question_path(Question.first, user_id: @user.id) %>
+  </div>
+
+<% else %>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3>Congratulations! Here are your answers.</h3.>
+    </div>
+    
+    <% @user.survey.questions.each do |question| %>
+      <div>
+        <div class="panel-heading">
+          <h3>Question <%= question.id %></h3>
+        </div>
+        <%= question.body %></div>
+      </div>
+      <div>
+        <div class="panel-heading">
+          <h3>Your Answer to Question <%= question.id %></h3>
+        </div>
+        <%= @user.answers.find(question.id).body %>
+      </div>
+    <% end %>
+  </div>
+
+<% end %>
